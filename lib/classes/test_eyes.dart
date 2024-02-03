@@ -6,8 +6,8 @@ class TestEyesightPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Test Eyesight")),
-      body: const Center(child: Text("Test Eyesight Page")),
+      appBar: AppBar(title: const Text("Prueba de visión")),
+      body: const Center(child: Text("Pagina para test de la vista")),
     );
   }
 }
