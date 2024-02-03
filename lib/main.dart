@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'classes/test_eyes.dart';
+import 'classes/instructions.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,7 +49,7 @@ class _MyHomePageState extends State<_MyHomePage> {
                 Navigator.push(
                 context,
                 MaterialPageRoute(
-                builder: (context) => const TestEyesightPage()));
+                builder: (context) => const InstructionsPage()));
               },
               child: Container(
                 width: double.infinity,
