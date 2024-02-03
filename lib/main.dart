@@ -29,7 +29,7 @@ class _MyHomePageState extends State<_MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Peek Acusie'),
+        title: const Text('Peek Acuity'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
