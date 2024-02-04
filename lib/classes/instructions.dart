@@ -8,7 +8,6 @@ class InstructionsPage extends StatefulWidget {
 }
 
 class InstructionsPageState extends State<InstructionsPage> {
-
   List<String> images = [
     "sitDown1.jpg",
     "close.jpeg",
@@ -40,14 +39,14 @@ class InstructionsPageState extends State<InstructionsPage> {
         padding: const EdgeInsets.all(30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,         
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-          'assets/images/${images[currentInstructionIndex]}',
-          height: 300,
-          width: double.infinity,
-          fit: BoxFit.cover,
-        ),
+              'assets/images/${images[currentInstructionIndex]}',
+              height: 300,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
             Text(
               nameOfInstruction[currentInstructionIndex],
               style: const TextStyle(
