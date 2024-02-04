@@ -8,6 +8,14 @@ class InstructionsPage extends StatefulWidget {
 }
 
 class InstructionsPageState extends State<InstructionsPage> {
+
+  List<String> images = [
+    "sitDown1.jpg",
+    "close.jpeg",
+    "distance.jpeg",
+    "coverEye.jpg",
+  ];
+
   List<String> nameOfInstruction = [
     "Sentarse",
     "Nivel del ojo",
@@ -34,6 +42,12 @@ class InstructionsPageState extends State<InstructionsPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,         
           children: [
+            Image.asset(
+          'assets/images/${images[currentInstructionIndex]}',
+          height: 300,
+          width: double.infinity,
+          fit: BoxFit.cover,
+        ),
             Text(
               nameOfInstruction[currentInstructionIndex],
               style: const TextStyle(
