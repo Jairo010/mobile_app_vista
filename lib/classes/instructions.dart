@@ -33,7 +33,7 @@ class InstructionsPageState extends State<InstructionsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Instructions"),
+        title: const Text("Instrucciones"),
       ),
       body: Container(
         padding: const EdgeInsets.all(30),
