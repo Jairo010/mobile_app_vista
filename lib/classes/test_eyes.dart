@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'results.dart';
-import '../main.dart';
 
 class TestEyesightPage extends StatefulWidget {
   const TestEyesightPage({Key? key}) : super(key: key);
