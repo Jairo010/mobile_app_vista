@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'results.dart';
+import '../main.dart';
 
 class TestEyesightPage extends StatefulWidget {
   const TestEyesightPage({Key? key}) : super(key: key);
@@ -66,16 +68,29 @@ class TestEyesightPageState extends State<TestEyesightPage> {
           containerHeight -= 50;
           containerWidth -= 50;
         }
+      }else{
+        if(count == 8){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>  ResultWidget(size: size), 
+            ),
+          );
+        }
       }
     }
   }
-
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
