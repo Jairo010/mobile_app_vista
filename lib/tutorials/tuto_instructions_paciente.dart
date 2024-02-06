@@ -4,7 +4,8 @@ import 'instruction_post_pacient.dart';
 class InstructionsPacientePage extends StatefulWidget {
   const InstructionsPacientePage({Key? key}) : super(key: key);
   @override
-  InstructionsPacientePageState createState() => InstructionsPacientePageState();
+  InstructionsPacientePageState createState() =>
+      InstructionsPacientePageState();
 }
 
 class InstructionsPacientePageState extends State<InstructionsPacientePage> {
@@ -31,73 +32,88 @@ class InstructionsPacientePageState extends State<InstructionsPacientePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Instrucciones"),
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/images/${images[currentInstructionIndex]}',
-              height: 300,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-            Text(
-              nameOfInstruction[currentInstructionIndex],
-              style: const TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
+    // ignore: deprecated_member_use
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.popUntil(context, ModalRoute.withName('/'));
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Instrucciones"),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              // Navegar a la página principal
+              Navigator.pushReplacementNamed(context, '/');
+            },
+          ),
+        ),
+        body: Container(
+          padding: const EdgeInsets.all(30),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/${images[currentInstructionIndex]}',
+                height: 300,
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
-            ),
-            Text(
-              instructions[currentInstructionIndex],
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                if (currentInstructionIndex > 0)
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        currentInstructionIndex--;
-                      });
-                    },
-                    child: const Text("Back"),
-                  ),
-                const SizedBox(width: 16),
-                ElevatedButton(
-                  onPressed: currentInstructionIndex < instructions.length - 1
-                      ? () {
-                          setState(() {
-                            currentInstructionIndex++;
-                          });
-                        }
-                      : () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const InstructionPostPacientPage(),
-                            ),
-                          );
-                        },
-                  child: Text(
-                    currentInstructionIndex < instructions.length - 1
-                        ? "Next"
-                        : "Done",
-                  ),
+              Text(
+                nameOfInstruction[currentInstructionIndex],
+                style: const TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
-            ),
-          ],
+              ),
+              Text(
+                instructions[currentInstructionIndex],
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (currentInstructionIndex > 0)
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          currentInstructionIndex--;
+                        });
+                      },
+                      child: const Text("Back"),
+                    ),
+                  const SizedBox(width: 16),
+                  ElevatedButton(
+                    onPressed: currentInstructionIndex < instructions.length - 1
+                        ? () {
+                            setState(() {
+                              currentInstructionIndex++;
+                            });
+                          }
+                        : () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const InstructionPostPacientPage(),
+                              ),
+                            );
+                          },
+                    child: Text(
+                      currentInstructionIndex < instructions.length - 1
+                          ? "Next"
+                          : "Done",
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

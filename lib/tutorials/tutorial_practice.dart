@@ -17,7 +17,14 @@ class PracticeTutorialPageState extends State<PracticeTutorialPage> {
     pi,
     0,
   ];
+  List<String> directions = [
+    'Arriba',
+    'Abajo',
+    'Izquierda',
+    'Derecha',
+  ];
   int randomRotation = 0;
+  int randomDirectios = 0;
   double rotationAngle = 0.0;
   bool allowRotation = true;
 
@@ -30,45 +37,31 @@ class PracticeTutorialPageState extends State<PracticeTutorialPage> {
   double containerWidth = 300;
   int count = 0;
   double position = 0.0;
-  String leftIndication = 'Desliza la pantalla en direccion correspondiente';
+  String currectDirection = '';
+  String estDirection = '';
+  String leftIndication = 'Desliza la pantalla en direccion indicada';
 
   void change() {
-    if (count >= 1 && count <= 3) {
-      Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const InstructionPostPracticePage(),
-            ),
-          );
+    if (count >= 0 && count < 3) {
       imageHeight -= 50;
       imageWidth -= 50;
       if (containerHeight <= 250) {
         containerHeight -= 50;
         containerWidth -= 50;
       } else {
-        containerHeight -= 80;
-        containerWidth -= 80;
+        containerHeight -= 70;
+        containerWidth -= 70;
       }
     } else {
       if (count >= 4 && count <= 5) {
-        imageHeight -= 25;
-        imageWidth -= 25;
-        if (containerHeight <= 100) {
-          containerHeight -= 25;
-          containerWidth -= 25;
-        } else {
-          containerHeight -= 50;
-          containerWidth -= 50;
-        }
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const InstructionPostPracticePage(),
+          ),
+        );
       } else {
-        if (count == 8) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const InstructionPostPracticePage(),
-            ),
-          );
-        }
+        if (count == 8) {}
       }
     }
   }
@@ -76,6 +69,7 @@ class PracticeTutorialPageState extends State<PracticeTutorialPage> {
   @override
   void initState() {
     super.initState();
+    currectDirection = directions[0];
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
@@ -104,17 +98,17 @@ class PracticeTutorialPageState extends State<PracticeTutorialPage> {
                         maxHeight: 300,
                         maxWidth: 180,
                       ),
-                      child: const Column(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 130),
+                          const SizedBox(height: 130),
                           Expanded(
                             child: Row(
                               children: [
                                 Flexible(
                                   child: Text(
-                                    'Desliza la pantalla en la direccion indicada',
-                                    style: TextStyle(
+                                    leftIndication,
+                                    style: const TextStyle(
                                       color: Color.fromARGB(255, 0, 0, 0),
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
@@ -143,64 +137,93 @@ class PracticeTutorialPageState extends State<PracticeTutorialPage> {
                   final dx = details.delta.dx;
                   final dy = details.delta.dy;
                   randomRotation = random.nextInt(4);
+                  randomDirectios = random.nextInt(4);
 
                   if (dx > 0 || dy > 0 || (dx < 0 || dy < 0)) {
-                    double rotationActual = rotationAngle;
+                    String directionActual = currectDirection;
                     setState(() {
                       rotationAngle = rotation[randomRotation];
                       allowRotation = false;
+                      currectDirection = directions[randomDirectios];
                     });
                     if (dy > 0 && dy > dx) {
                       position = pi / 2;
-                      if (rotationActual == position) {
+                      estDirection = 'Abajo';
+                      if (directionActual == estDirection) {
                         setState(() {
                           change();
                           count++;
+                          leftIndication = 'Bien. Sigue asi';
                         });
                         setState(() {
                           allowRotation = false;
+                        });
+                      } else {
+                        setState(() {
+                          leftIndication =
+                              'ERROR: Solo tienes que deslizar en direccion indicada por el paciente';
                         });
                       }
                     } else {
                       if (dx > 0 && dx > dy) {
                         position = 0.0;
-                        if (rotationActual == position) {
+                        estDirection = 'Derecha';
+                        if (directionActual == estDirection) {
                           setState(() {
                             change();
                             count++;
+                            leftIndication = 'Bien. Sigue asi';
                           });
                           setState(() {
                             allowRotation = false;
+                          });
+                        } else {
+                          setState(() {
+                            leftIndication =
+                                'ERROR: Solo tienes que deslizar en direccion indicada por el paciente';
                           });
                         }
                       } else {
                         if (dx < 0 && dx < dy) {
                           position = pi;
-                          if (rotationActual == position) {
+                          estDirection = 'Izquierda';
+                          if (directionActual == estDirection) {
                             setState(() {
                               change();
                               count++;
+                              leftIndication = 'Bien. Sigue asi';
                             });
                             setState(() {
                               allowRotation = false;
+                            });
+                          } else {
+                            setState(() {
+                              leftIndication =
+                                  'ERROR: Solo tienes que deslizar en direccion indicada por el paciente';
                             });
                           }
                         } else {
                           if (dy < 0 && dy < dx) {
                             position = -pi / 2;
-                            if (rotationActual == position) {
+                            estDirection = 'Arriba';
+                            if (directionActual == estDirection) {
                               setState(() {
                                 change();
                                 count++;
+                                leftIndication = 'Bien. Sigue asi';
                               });
                               setState(() {
                                 allowRotation = false;
                               });
+                            } else {
+                              
                             }
                           } else {
                             setState(() {
                               rotationAngle = rotation[randomRotation];
                               allowRotation = false;
+                              currectDirection = directions[randomDirectios];
+                              
                             });
                           }
                         }
@@ -231,14 +254,14 @@ class PracticeTutorialPageState extends State<PracticeTutorialPage> {
                 ),
               ),
             ),
-            const Positioned(
+            Positioned(
               top: 130,
               right: 0,
               child: Padding(
-                padding: EdgeInsets.only(top: 70, right: 80),
+                padding: const EdgeInsets.only(top: 70, right: 80),
                 child: Text(
-                  'Right',
-                  style: TextStyle(
+                  currectDirection,
+                  style: const TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),
                     fontSize: 12,
                     fontWeight: FontWeight.bold,

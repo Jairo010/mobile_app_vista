@@ -192,9 +192,10 @@ class _MyHomePageState extends State<_MyHomePage> {
   }
 
   void _showDistanceOptions(BuildContext context) async {
+    // ignore: unused_local_variable
     final selectedOption = await showMenu(
       context: context,
-      position: RelativeRect.fromLTRB(10, 10, 0, 0),
+      position: const RelativeRect.fromLTRB(10, 10, 0, 0),
       items: [
         PopupMenuItem(
           child: ListTile(
