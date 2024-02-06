@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../main.dart';
+import 'settings.dart';
 
 class ResultWidget extends StatefulWidget {
   final double size;
@@ -9,19 +11,56 @@ class ResultWidget extends StatefulWidget {
 }
 
 class ResultWidgetPageState extends State<ResultWidget> {
-  String? _selectedOption;
 
-  final double size;
+  double size;
 
   ResultWidgetPageState({required this.size});
 
   @override
   void initState() {
+    cargarDistancia();
     super.initState();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+  }
+
+  String selectedUnit = '';
+  String sizeFinal = '';
+  SettingsPageState settingsDistance = new SettingsPageState();
+
+  void cargarDistancia() {
+    settingsDistance.loadUnitSetting().then((value) {
+      setState(() {
+        selectedUnit = value;
+        if (size == 0.0 && selectedUnit == 'Medida (0.0)') {
+          sizeFinal = '0.0';
+        } else {
+          if (size == 0.0 && selectedUnit == 'Medida (6/6)') {
+            sizeFinal = '6/6';
+          } else {
+            if (size == 0.0 && selectedUnit == 'Medida (20/20)') {
+              sizeFinal = '20/20';
+            }
+          }
+        }
+      });
+    });
+  }
+
+  void setResutls(String hola) {
+    if (size == 0.0 && hola == 'Medida (0.0)') {
+          sizeFinal = '0.0';
+        } else {
+          if (size == 0.0 && hola == 'Medida (6/6)') {
+            sizeFinal = '6/6';
+          } else {
+            if (size == 0.0 && hola == 'Medida (20/20)') {
+              sizeFinal = '20/20';
+            }
+          }
+        }
   }
 
   @override
@@ -55,7 +94,13 @@ class ResultWidgetPageState extends State<ResultWidget> {
                   padding: const EdgeInsets.only(right: 16.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      // Acción del botón
+                      SettingsPageState.muyStatic();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MyApp(),
+                        ),
+                      );
                     },
                     child: const Text("Hecho"),
                   ),
@@ -99,9 +144,9 @@ class ResultWidgetPageState extends State<ResultWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '$size',
+                    sizeFinal,
                     textAlign: TextAlign.center,
-                      style: const TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 50,
@@ -127,49 +172,53 @@ class ResultWidgetPageState extends State<ResultWidget> {
       ),
     );
   }
+
   void showSettingsMenu(BuildContext context) {
     showMenu<String>(
       context: context,
       position: const RelativeRect.fromLTRB(120, 120, 0, 0),
       items: <PopupMenuEntry<String>>[
         PopupMenuItem<String>(
-          value: 'option1',
+          value: 'Medida (0.0)',
           child: RadioListTile<String>(
-            title: const Text('Opción 1'),
-            value: 'option1',
-            groupValue: _selectedOption,
+            title: const Text('En medida (0.0)'),
+            value: 'Medida (0.0)',
+            groupValue: selectedUnit,
             onChanged: (value) {
               setState(() {
-                _selectedOption = value;
+                selectedUnit = value!;
               });
+              setResutls(selectedUnit);
               Navigator.pop(context);
             },
           ),
         ),
         PopupMenuItem<String>(
-          value: 'option2',
+          value: 'Medida (6/6)',
           child: RadioListTile<String>(
-            title: const Text('Opción 2'),
-            value: 'option2',
-            groupValue: _selectedOption,
+            title: const Text('En medida (6/6)'),
+            value: 'Medida (6/6)',
+            groupValue: selectedUnit,
             onChanged: (value) {
               setState(() {
-                _selectedOption = value;
+                selectedUnit = value!;
               });
+              setResutls(selectedUnit);
               Navigator.pop(context);
             },
           ),
         ),
         PopupMenuItem<String>(
-          value: 'option3',
+          value: 'Medida (20/20)',
           child: RadioListTile<String>(
-            title: const Text('Opción 3'),
-            value: 'option3',
-            groupValue: _selectedOption,
+            title: const Text('En medida (20/20)'),
+            value: 'Medida (20/20)',
+            groupValue: selectedUnit,
             onChanged: (value) {
               setState(() {
-                _selectedOption = value;
+                selectedUnit = value!;
               });
+              setResutls(selectedUnit);
               Navigator.pop(context);
             },
           ),
