@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'classes/instructions.dart';
+import 'classes/settings.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,15 +29,15 @@ class _MyHomePageState extends State<_MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         title: Row(
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Image.asset(
                 'assets/images/logo.jpeg',
-                height: 50, // ajusta la altura de la imagen según sea necesario
-                width: 50, // ajusta el ancho de la imagen según sea necesario
+                height: 50, 
+                width: 50, 
               ),
             ),
             const Text(
@@ -47,6 +48,14 @@ class _MyHomePageState extends State<_MyHomePage> {
             ),
           ],
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.more_vert),
+            onPressed: () {
+              _showDistanceOptions(context);
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -64,9 +73,11 @@ class _MyHomePageState extends State<_MyHomePage> {
             InkWell(
               onTap: () {
                 Navigator.push(
-                context,
-                MaterialPageRoute(
-                builder: (context) => const InstructionsPage()));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const InstructionsPage(),
+                  ),
+                );
               },
               child: Container(
                 width: double.infinity,
@@ -101,4 +112,34 @@ class _MyHomePageState extends State<_MyHomePage> {
       ),
     );
   }
+  void _showDistanceOptions(BuildContext context) async {
+  final selectedOption = await showMenu(
+    context: context,
+    position: RelativeRect.fromLTRB(10, 10, 0, 0),
+    items: [
+      PopupMenuItem(
+        child: ListTile(
+          title: const Text('Ajustes'),
+          onTap: () {
+            Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SettingsPage(),
+                  ),
+                );
+          },
+        ),
+      ),
+      PopupMenuItem(
+        child: ListTile(
+          title: const Text('Calibracion'),
+          onTap: () {
+            //ResultWidgetPageState.muyStatic();
+          },
+        ),
+      ),
+    ],
+  );
+}
+
 }
