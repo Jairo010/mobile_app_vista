@@ -35,6 +35,7 @@ class TestEyesightPageState extends State<TestEyesightPage> {
   double size = 1.0;
   String result = '29.1';
   String sizeResult = '1.0';
+  int countMistakes = 0;
 
   void change() {
     if (count >= 0 && count <= 3) {
@@ -80,7 +81,26 @@ class TestEyesightPageState extends State<TestEyesightPage> {
       }
     }
   }
+  void changeMistake(){
+    if (countMistakes < 0) {
+      countMistakes = 0;
+    }
+    if(countMistakes >= 0){
+      countMistakes--;
+    }
+  }
 
+
+  void routeOnMistake(){
+    if(countMistakes == 3){
+      Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ResultWidget(size: size),
+            ),
+          );
+    }
+  }
   @override
   void initState() {
     cargarDistancia();
@@ -101,6 +121,7 @@ class TestEyesightPageState extends State<TestEyesightPage> {
       });
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -178,11 +199,15 @@ class TestEyesightPageState extends State<TestEyesightPage> {
                       position = pi / 2;
                       if (rotationActual == position) {
                         setState(() {
+                          allowRotation = false;
                           change();
+                          changeMistake();
                           count++;
                         });
+                      } else {
                         setState(() {
-                          allowRotation = false;
+                          routeOnMistake();
+                          countMistakes++;
                         });
                       }
                     } else {
@@ -190,11 +215,15 @@ class TestEyesightPageState extends State<TestEyesightPage> {
                         position = 0.0;
                         if (rotationActual == position) {
                           setState(() {
+                            allowRotation = false;
                             change();
+                            changeMistake();
                             count++;
                           });
+                        } else {
                           setState(() {
-                            allowRotation = false;
+                            routeOnMistake();
+                            countMistakes++;
                           });
                         }
                       } else {
@@ -202,11 +231,15 @@ class TestEyesightPageState extends State<TestEyesightPage> {
                           position = pi;
                           if (rotationActual == position) {
                             setState(() {
+                              allowRotation = false;
                               change();
+                              changeMistake();
                               count++;
                             });
+                          } else {
                             setState(() {
-                              allowRotation = false;
+                              routeOnMistake();
+                              countMistakes++;
                             });
                           }
                         } else {
@@ -214,11 +247,15 @@ class TestEyesightPageState extends State<TestEyesightPage> {
                             position = -pi / 2;
                             if (rotationActual == position) {
                               setState(() {
+                                allowRotation = false;
                                 change();
+                                changeMistake();
                                 count++;
                               });
+                            } else {
                               setState(() {
-                                allowRotation = false;
+                                routeOnMistake();
+                                countMistakes++;
                               });
                             }
                           } else {
