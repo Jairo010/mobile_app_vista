@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'results.dart';
+import 'settings.dart';
 
 class TestEyesightPage extends StatefulWidget {
   const TestEyesightPage({Key? key}) : super(key: key);
@@ -67,25 +68,38 @@ class TestEyesightPageState extends State<TestEyesightPage> {
           containerHeight -= 50;
           containerWidth -= 50;
         }
-      }else{
-        if(count == 8){
+      } else {
+        if (count == 8) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>  ResultWidget(size: size), 
+              builder: (context) => ResultWidget(size: size),
             ),
           );
         }
       }
     }
   }
+
   @override
   void initState() {
+    cargarDistancia();
     super.initState();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
+  }
+
+  String selectedDistance = '';
+  SettingsPageState settingsDistance = new SettingsPageState();
+
+  void cargarDistancia() {
+    settingsDistance.loadDistanceSetting().then((value) {
+      setState(() {
+        selectedDistance = value;
+      });
+    });
   }
 
   @override
@@ -99,7 +113,7 @@ class TestEyesightPageState extends State<TestEyesightPage> {
       child: Scaffold(
         body: Stack(
           children: [
-             SingleChildScrollView(
+            SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -128,8 +142,8 @@ class TestEyesightPageState extends State<TestEyesightPage> {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          'Distancia 2m',
-                          style: TextStyle(
+                          'Distancia $selectedDistance',
+                          style: const TextStyle(
                             color: Color.fromARGB(255, 0, 0, 0),
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
