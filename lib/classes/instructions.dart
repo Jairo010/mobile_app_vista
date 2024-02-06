@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'test_eyes.dart';
+import 'package:flutter/services.dart';
 
 class InstructionsPage extends StatefulWidget {
   const InstructionsPage({Key? key}) : super(key: key);
@@ -8,6 +9,16 @@ class InstructionsPage extends StatefulWidget {
 }
 
 class InstructionsPageState extends State<InstructionsPage> {
+
+  @override
+  void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ]);
+    super.initState();    
+  }
+
   List<String> images = [
     "sitDown1.jpg",
     "close.jpeg",
@@ -101,5 +112,13 @@ class InstructionsPageState extends State<InstructionsPage> {
         ),
       ),
     );
+  }
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+    super.dispose();
   }
 }

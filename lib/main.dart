@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'classes/instructions.dart';
 import 'classes/settings.dart';
-import 'simulation/simulation.dart';
 import 'tutorials/tutorials.dart';
+import 'classes/simulation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -115,7 +115,7 @@ class _MyHomePageState extends State<_MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Simulations(),
+                    builder: (context) => const SimulationPage(),
                   ),
                 );
               },
@@ -194,7 +194,7 @@ class _MyHomePageState extends State<_MyHomePage> {
   void _showDistanceOptions(BuildContext context) async {
     final selectedOption = await showMenu(
       context: context,
-      position: RelativeRect.fromLTRB(10, 10, 0, 0),
+      position: const RelativeRect.fromLTRB(10, 10, 0, 0),
       items: [
         PopupMenuItem(
           child: ListTile(

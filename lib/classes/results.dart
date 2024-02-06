@@ -28,7 +28,7 @@ class ResultWidgetPageState extends State<ResultWidget> {
 
   String selectedUnit = '';
   String sizeFinal = '';
-  SettingsPageState settingsDistance = new SettingsPageState();
+  SettingsPageState settingsDistance = SettingsPageState();
 
   void cargarDistancia() {
     settingsDistance.loadUnitSetting().then((value) {
