@@ -11,7 +11,6 @@ class ResultWidget extends StatefulWidget {
 }
 
 class ResultWidgetPageState extends State<ResultWidget> {
-
   double size;
 
   ResultWidgetPageState({required this.size});
@@ -34,14 +33,23 @@ class ResultWidgetPageState extends State<ResultWidget> {
     settingsDistance.loadUnitSetting().then((value) {
       setState(() {
         selectedUnit = value;
-        if (size == 0.0 && selectedUnit == 'Medida (0.0)') {
+        if (size == 0.0 && selectedUnit == 'Medida (0.0)' || (size > 0.0 && selectedUnit == 'Medida (0.0)')) {
           sizeFinal = '0.0';
+          if (size > 0.0) {
+            sizeFinal = size.toString();
+          }
         } else {
-          if (size == 0.0 && selectedUnit == 'Medida (6/6)') {
+          if (size == 0.0 && selectedUnit == 'Medida (6/6)' || (size > 0.0 && selectedUnit == 'Medida (6/6)')) {
             sizeFinal = '6/6';
+            if (size > 0.0) {
+              sizeFinal = '6/${((size * 10) * 6).toStringAsFixed(0)}';
+            }
           } else {
-            if (size == 0.0 && selectedUnit == 'Medida (20/20)') {
+            if (size == 0.0 && selectedUnit == 'Medida (20/20)' || (size > 0.0 && selectedUnit == 'Medida (20/20)')) {
               sizeFinal = '20/20';
+              if (size > 0.0) {
+                sizeFinal = '20/${((size * 10) * 20).toStringAsFixed(0)}';
+              }
             }
           }
         }
@@ -50,17 +58,27 @@ class ResultWidgetPageState extends State<ResultWidget> {
   }
 
   void setResutls(String currentLevel) {
-    if (size == 0.0 && currentLevel == 'Medida (0.0)') {
-          sizeFinal = '0.0';
-        } else {
-          if (size == 0.0 && currentLevel == 'Medida (6/6)') {
-            sizeFinal = '6/6';
-          } else {
-            if (size == 0.0 && currentLevel == 'Medida (20/20)') {
-              sizeFinal = '20/20';
-            }
-          }
+    if (size == 0.0 && currentLevel == 'Medida (0.0)' || (size > 0.0 && currentLevel == 'Medida (0.0)')) {
+      sizeFinal = '0.0';
+      if (size > 0.0) {
+        sizeFinal = size.toString();
+      }
+    } else {
+      if (size == 0.0 && currentLevel == 'Medida (6/6)' || (size > 0.0 && currentLevel == 'Medida (6/6)')) {
+        sizeFinal = '6/6';
+        if (size > 0.0) {
+          sizeFinal = '6/${((size * 10) * 6).toStringAsFixed(0)}';
         }
+      } else {
+        if (size == 0.0 && currentLevel == 'Medida (20/20)' || (size > 0.0 && currentLevel == 'Medida (20/20)')) {
+          sizeFinal = '20/20';
+          if (size > 0.0) {
+            sizeFinal = '20/${((size * 10) * 20).toStringAsFixed(0)}';
+          }
+          int.parse('2');
+        }
+      }
+    }
   }
 
   @override
@@ -134,8 +152,8 @@ class ResultWidgetPageState extends State<ResultWidget> {
           const SizedBox(height: 100),
           Center(
             child: Container(
-              width: 150,
-              height: 150,
+              width: 170,
+              height: 170,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.blue,
