@@ -7,7 +7,7 @@ import 'dart:ui';
 import 'package:mobile_app/classes/instructions.dart';
 
 class SimulationPage extends StatefulWidget {
-  const SimulationPage({Key? key}) : super(key: key);
+  const SimulationPage({super.key});
   @override
   SimulationPageState createState() => SimulationPageState();
 }
@@ -29,7 +29,7 @@ class SimulationPageState extends State<SimulationPage> {
   Future<void> initializeCameras() async {
     WidgetsFlutterBinding.ensureInitialized();
     cameras = await availableCameras();
-    runApp(CameraApp());
+    runApp(const CameraApp());
   }
 
   @override
@@ -48,7 +48,7 @@ class SimulationPageState extends State<SimulationPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => InstructionsPage(),
+                builder: (context) => const InstructionsPage(),
             ),
             );
           }),
@@ -133,9 +133,9 @@ class SimulationPageState extends State<SimulationPage> {
                   setState(() {
                     dropdownButtonText = newValue!;
                     if (newValue == 'Pizarra') {                      
-                      _image = AssetImage('assets/images/BlackboardSpanish.jpg');
+                      _image = const AssetImage('assets/images/BlackboardSpanish.jpg');
                     } else if (newValue == 'Aula') {
-                      _image = AssetImage('assets/images/classroom.jpg');
+                      _image = const AssetImage('assets/images/classroom.jpg');
                     } else if (newValue == 'Cámara') {
                       getImage();
                     }
@@ -152,7 +152,7 @@ class SimulationPageState extends State<SimulationPage> {
 
   late CameraController controller;
   double _sliderValue = 0.0;
-  ImageProvider _image = AssetImage('assets/images/BlackboardSpanish.jpg');
+  ImageProvider _image = const AssetImage('assets/images/BlackboardSpanish.jpg');
   final picker = ImagePicker();
 
   Future<void> getImage() async {
@@ -175,15 +175,19 @@ class SimulationPageState extends State<SimulationPage> {
 }
 
 class CameraApp extends StatelessWidget {
+  const CameraApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: CameraScreen(),
     );
   }
 }
 
 class CameraScreen extends StatefulWidget {
+  const CameraScreen({super.key});
+
   @override
   _CameraScreenState createState() => _CameraScreenState();
 }
@@ -219,7 +223,7 @@ class _CameraScreenState extends State<CameraScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => InstructionsPage(),
+                builder: (context) => const InstructionsPage(),
             ),
             );
           }),
@@ -304,9 +308,9 @@ class _CameraScreenState extends State<CameraScreen> {
                   setState(() {
                     dropdownButtonText = newValue!;
                     if (newValue == 'Pizarra') {
-                      _image = AssetImage('assets/images/BlackboardSpanish.jpg');
+                      _image = const AssetImage('assets/images/BlackboardSpanish.jpg');
                     } else if (newValue == 'Aula') {
-                      _image = AssetImage('assets/images/classroom.jpg');
+                      _image = const AssetImage('assets/images/classroom.jpg');
                     } else if (newValue == 'Cámara') {
                       getImage();
                     }
@@ -322,7 +326,7 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 
   double _sliderValue = 0.0;
-  ImageProvider _image = AssetImage('assets/images/BlackboardSpanish.jpg');
+  ImageProvider _image = const AssetImage('assets/images/BlackboardSpanish.jpg');
   final picker = ImagePicker();
 
   Future<void> getImage() async {

@@ -5,7 +5,7 @@ import 'results.dart';
 import 'settings.dart';
 
 class TestEyesightPage extends StatefulWidget {
-  const TestEyesightPage({Key? key}) : super(key: key);
+  const TestEyesightPage({super.key});
 
   @override
   TestEyesightPageState createState() => TestEyesightPageState();
@@ -92,7 +92,7 @@ class TestEyesightPageState extends State<TestEyesightPage> {
   }
 
   String selectedDistance = '';
-  SettingsPageState settingsDistance = new SettingsPageState();
+  SettingsPageState settingsDistance = SettingsPageState();
 
   void cargarDistancia() {
     settingsDistance.loadDistanceSetting().then((value) {

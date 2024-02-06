@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'tutorial_practice.dart';
 
 class InstructionTutorialsPage extends StatefulWidget {
-  const InstructionTutorialsPage({Key? key}) : super(key: key);
+  const InstructionTutorialsPage({super.key});
   @override
   InstructionTutorialsPageState createState() => InstructionTutorialsPageState();
 }

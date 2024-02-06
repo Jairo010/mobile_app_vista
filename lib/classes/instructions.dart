@@ -3,7 +3,7 @@ import 'test_eyes.dart';
 import 'package:flutter/services.dart';
 
 class InstructionsPage extends StatefulWidget {
-  const InstructionsPage({Key? key}) : super(key: key);
+  const InstructionsPage({super.key});
   @override
   InstructionsPageState createState() => InstructionsPageState();
 }

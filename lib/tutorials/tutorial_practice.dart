@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'tutorial_post_practice.dart';
 
 class PracticeTutorialPage extends StatefulWidget {
-  const PracticeTutorialPage({Key? key}) : super(key: key);
+  const PracticeTutorialPage({super.key});
 
   @override
   PracticeTutorialPageState createState() => PracticeTutorialPageState();
