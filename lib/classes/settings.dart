@@ -77,8 +77,8 @@ class SettingsPageState extends State<SettingsPage> {
             _showUnitsOptions(context);
           }),
           buildListTile('Tests Completados', '$countTest', () {}),
-          buildListTileWithButton('Send anonymous feedback', () {}),
-          buildListTile('Version number', '3.7.0', () {}),
+          buildListTileWithButton('Enviar feedback anónimo', () {}),
+          buildListTile('Versión', '3.7.0', () {}),
         ],
       ),
     );

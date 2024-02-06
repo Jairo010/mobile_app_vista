@@ -49,14 +49,14 @@ class ResultWidgetPageState extends State<ResultWidget> {
     });
   }
 
-  void setResutls(String hola) {
-    if (size == 0.0 && hola == 'Medida (0.0)') {
+  void setResutls(String currentLevel) {
+    if (size == 0.0 && currentLevel == 'Medida (0.0)') {
           sizeFinal = '0.0';
         } else {
-          if (size == 0.0 && hola == 'Medida (6/6)') {
+          if (size == 0.0 && currentLevel == 'Medida (6/6)') {
             sizeFinal = '6/6';
           } else {
-            if (size == 0.0 && hola == 'Medida (20/20)') {
+            if (size == 0.0 && currentLevel == 'Medida (20/20)') {
               sizeFinal = '20/20';
             }
           }
