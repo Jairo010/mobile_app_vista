@@ -14,6 +14,7 @@ class SimulationPage extends StatefulWidget {
 
 List<CameraDescription> cameras = [];
 String dropdownButtonText = 'Pizarra';
+Color titleColor = Colors.blueAccent;
 
 class SimulationPageState extends State<SimulationPage> {
   @override
@@ -73,7 +74,7 @@ class SimulationPageState extends State<SimulationPage> {
                 ),
               ),
             ),
-          const Align(
+          Align(
             alignment: Alignment.topLeft,
             child: Padding(
               padding: EdgeInsets.all(8.0),
@@ -81,10 +82,10 @@ class SimulationPageState extends State<SimulationPage> {
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 0, 255, 132))),
+                      color: titleColor)),
             ),
           ),
-          const Align(
+          Align(
             alignment: Alignment.topRight,
             child: Padding(
               padding: EdgeInsets.all(8.0),
@@ -92,7 +93,7 @@ class SimulationPageState extends State<SimulationPage> {
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 0, 255, 132))),
+                      color: titleColor)),
             ),
           ),
           Align(
@@ -134,10 +135,13 @@ class SimulationPageState extends State<SimulationPage> {
                     dropdownButtonText = newValue!;
                     if (newValue == 'Pizarra') {                      
                       _image = const AssetImage('assets/images/BlackboardSpanish.jpg');
+                      titleColor = Colors.blueAccent;
                     } else if (newValue == 'Aula') {
                       _image = const AssetImage('assets/images/classroom.jpg');
+                      titleColor = Colors.black;
                     } else if (newValue == 'Cámara') {
                       getImage();
+                      titleColor = Colors.black;
                     }
                   });
                 },
@@ -248,7 +252,7 @@ class _CameraScreenState extends State<CameraScreen> {
                 ),
               ),
             ),
-          const Align(
+          Align(
             alignment: Alignment.topLeft,
             child: Padding(
               padding: EdgeInsets.all(8.0),
@@ -256,10 +260,10 @@ class _CameraScreenState extends State<CameraScreen> {
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 0, 255, 132))),
+                      color: titleColor)),
             ),
           ),
-          const Align(
+          Align(
             alignment: Alignment.topRight,
             child: Padding(
               padding: EdgeInsets.all(8.0),
@@ -267,7 +271,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 0, 255, 132))),
+                      color: titleColor)),
             ),
           ),
           Align(
@@ -275,7 +279,7 @@ class _CameraScreenState extends State<CameraScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                Text(_sliderValue.toStringAsFixed(1), style: const TextStyle(fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold)),
+                Text(_sliderValue.toStringAsFixed(1), style: TextStyle(fontSize: 24, color: titleColor, fontWeight: FontWeight.bold)),
                 Slider(
                   value: _sliderValue,
                   min: 0.0,
@@ -309,10 +313,13 @@ class _CameraScreenState extends State<CameraScreen> {
                     dropdownButtonText = newValue!;
                     if (newValue == 'Pizarra') {
                       _image = const AssetImage('assets/images/BlackboardSpanish.jpg');
+                      titleColor = Colors.blueAccent;
                     } else if (newValue == 'Aula') {
                       _image = const AssetImage('assets/images/classroom.jpg');
+                      titleColor = Colors.black;
                     } else if (newValue == 'Cámara') {
                       getImage();
+                      titleColor = Colors.black;
                     }
                   });
                 },
