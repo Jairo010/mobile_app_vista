@@ -5,7 +5,7 @@ import 'settings.dart';
 
 class ResultWidget extends StatefulWidget {
   final double size;
-  const ResultWidget({Key? key, required this.size}) : super(key: key);
+  const ResultWidget({super.key, required this.size});
   @override
   ResultWidgetPageState createState() => ResultWidgetPageState(size: size);
 }
@@ -27,7 +27,7 @@ class ResultWidgetPageState extends State<ResultWidget> {
 
   String selectedUnit = '';
   String sizeFinal = '';
-  SettingsPageState settingsDistance = new SettingsPageState();
+  SettingsPageState settingsDistance = SettingsPageState();
 
   void cargarDistancia() {
     settingsDistance.loadUnitSetting().then((value) {

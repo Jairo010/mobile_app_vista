@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'instruction_post_pacient.dart';
 
 class InstructionsPacientePage extends StatefulWidget {
-  const InstructionsPacientePage({Key? key}) : super(key: key);
+  const InstructionsPacientePage({super.key});
   @override
   InstructionsPacientePageState createState() =>
       InstructionsPacientePageState();

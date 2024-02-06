@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'classes/instructions.dart';
 import 'classes/settings.dart';
-import 'simulation/simulation.dart';
 import 'tutorials/tutorials.dart';
+import 'classes/simulation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -115,7 +115,7 @@ class _MyHomePageState extends State<_MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Simulations(),
+                    builder: (context) => const SimulationPage(),
                   ),
                 );
               },

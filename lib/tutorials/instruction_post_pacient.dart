@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'final_tutorials.dart';
 
 class InstructionPostPacientPage extends StatefulWidget {
-  const InstructionPostPacientPage({Key? key}) : super(key: key);
+  const InstructionPostPacientPage({super.key});
   @override
   InstructionPostPacientPageState createState() =>
       InstructionPostPacientPageState();
