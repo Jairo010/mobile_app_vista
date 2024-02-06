@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'classes/instructions.dart';
 import 'classes/settings.dart';
+import 'simulation/simulation.dart';
+import 'tutorials/tutorials.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,12 +38,12 @@ class _MyHomePageState extends State<_MyHomePage> {
               padding: const EdgeInsets.all(8.0),
               child: Image.asset(
                 'assets/images/logo.jpeg',
-                height: 50, 
-                width: 50, 
+                height: 50,
+                width: 50,
               ),
             ),
             const Text(
-              'Optihelath',
+              'Optihealth',
               style: TextStyle(
                 fontSize: 30,
               ),
@@ -107,39 +109,116 @@ class _MyHomePageState extends State<_MyHomePage> {
                 ),
               ),
             ),
+            const SizedBox(height: 16),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Simulations(),
+                  ),
+                );
+              },
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Ver simulacion',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Mostrar diferentes niveles de vista',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Tutorials(),
+                  ),
+                );
+              },
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Tutoriales',
+                      style:  TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                     SizedBox(height: 8),
+                    Text(
+                      'Ver como funciona Optihealth',
+                      style:  TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+
   void _showDistanceOptions(BuildContext context) async {
-  final selectedOption = await showMenu(
-    context: context,
-    position: RelativeRect.fromLTRB(10, 10, 0, 0),
-    items: [
-      PopupMenuItem(
-        child: ListTile(
-          title: const Text('Ajustes'),
-          onTap: () {
-            Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SettingsPage(),
-                  ),
-                );
-          },
+    final selectedOption = await showMenu(
+      context: context,
+      position: RelativeRect.fromLTRB(10, 10, 0, 0),
+      items: [
+        PopupMenuItem(
+          child: ListTile(
+            title: const Text('Ajustes'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SettingsPage(),
+                ),
+              );
+            },
+          ),
         ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          title: const Text('Calibracion'),
-          onTap: () {
-            //ResultWidgetPageState.muyStatic();
-          },
+        PopupMenuItem(
+          child: ListTile(
+            title: const Text('Calibracion'),
+            onTap: () {
+              
+            },
+          ),
         ),
-      ),
-    ],
-  );
+      ],
+    );
+  }
 }
 
-}
