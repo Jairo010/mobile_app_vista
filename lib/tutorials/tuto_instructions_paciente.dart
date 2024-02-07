@@ -44,7 +44,6 @@ class InstructionsPacientePageState extends State<InstructionsPacientePage> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              // Navegar a la página principal
               Navigator.pushReplacementNamed(context, '/');
             },
           ),

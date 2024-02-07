@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'final_tutorials.dart';
+import '../main.dart';
 
 class InstructionPostPacientPage extends StatefulWidget {
   const InstructionPostPacientPage({super.key});
@@ -46,8 +47,12 @@ class InstructionPostPacientPageState
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              // Navegar a la página principal
-              Navigator.pushReplacementNamed(context, '/');
+              Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MyApp(),
+                              ),
+                            );
             },
           ),
         ),

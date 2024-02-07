@@ -40,8 +40,12 @@ class FinalTutorialsPageState extends State<FinalTutorialsPage> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              // Navegar a la página principal
-              Navigator.pushReplacementNamed(context, '/');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MyApp(),
+                ),
+              );
             },
           ),
         ),

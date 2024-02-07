@@ -83,7 +83,13 @@ class ResultWidgetPageState extends State<ResultWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    // ignore: deprecated_member_use
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.popUntil(context, ModalRoute.withName('/'));
+        return false;
+      },
+      child: Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -187,6 +193,7 @@ class ResultWidgetPageState extends State<ResultWidget> {
             ],
           )
         ],
+      ),
       ),
     );
   }

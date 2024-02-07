@@ -1,17 +1,17 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'results.dart';
-import 'settings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../main.dart';
 
 class MainCalibrationPage extends StatefulWidget {
-  const MainCalibrationPage({Key? key}) : super(key: key);
+  const MainCalibrationPage({super.key});
 
   @override
   MainCalibrationPageState createState() => MainCalibrationPageState();
 }
 
 class MainCalibrationPageState extends State<MainCalibrationPage> {
+  bool isChecked = false;
 
   @override
   void initState() {
@@ -20,6 +20,19 @@ class MainCalibrationPageState extends State<MainCalibrationPage> {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
+    _loadCheckboxState();
+  }
+
+  _loadCheckboxState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isChecked = prefs.getBool('isChecked') ?? false;
+    });
+  }
+
+  _saveCheckboxState(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isChecked', value);
   }
 
   @override
@@ -33,64 +46,107 @@ class MainCalibrationPageState extends State<MainCalibrationPage> {
       child: Scaffold(
         body: Stack(
           children: [
-            SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            const SizedBox(height: 30),
+            Container(
+              height: 90,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Container(
-                      constraints: const BoxConstraints(
-                        maxHeight: 300,
-                        maxWidth: 180,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 130),
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Flexible(
-                                  child: Text(
-                                    'leftIndication',
-                                    style: const TextStyle(
-                                      color: Color.fromARGB(255, 0, 0, 0),
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                    padding: EdgeInsets.only(left: 16.0),
+                    child: Text(
+                      "Comprobar Calibracion",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-            Positioned(
-              top: 130,
-              right: 0,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 70, right: 80),
-                child: Container(
-                  color: Colors.black,
-                  width: 250,
-                  height: 250,
-                    child: Transform.rotate(
-                      angle: pi,
-                      child: Image.asset(
-                        'assets/images/letter.jpg',
-                        height: 250,
-                        width: 250,
-                        fit: BoxFit.cover,
-                      ),
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 100),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                constraints: const BoxConstraints(
+                                  maxHeight: 300,
+                                  maxWidth: 300,
+                                ),
+                                child: const Text(
+                                  'Con una regla, comprueba la anchura y la altura de la E. Para que la prueba sea válida, ambas deben medir entre 38 mm y 42 mm. ',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Checkbox(
+                                    value: isChecked,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        isChecked = value!;
+                                        _saveCheckboxState(value);
+                                      });
+                                    },
+                                  ),
+                                  const Text(
+                                      'He comprobado la altura y el ancho de la E'),
+                                ],
+                              ),
+                              if (isChecked)
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const MyApp(),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text('Confirmar'),
+                                ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        Container(
+                          color: Colors.black,
+                          width: 250,
+                          height: 250,
+                          child: Transform.rotate(
+                            angle: 0,
+                            child: Image.asset(
+                              'assets/images/letter.jpg',
+                              height: 100,
+                              width: 100,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  
-                ),
+                  ),
+                ],
               ),
             ),
           ],

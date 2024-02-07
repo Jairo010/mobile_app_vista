@@ -3,6 +3,8 @@ import 'classes/instructions.dart';
 import 'classes/settings.dart';
 import 'tutorials/tutorials.dart';
 import 'classes/simulation.dart';
+import 'package:flutter/services.dart';
+import 'classes/main_calibration.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,6 +30,24 @@ class _MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<_MyHomePage> {
+
+  @override
+  void initState() {
+      SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.initState();
+  }
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -214,7 +234,12 @@ class _MyHomePageState extends State<_MyHomePage> {
           child: ListTile(
             title: const Text('Calibracion'),
             onTap: () {
-              
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MainCalibrationPage(),
+                ),
+              );
             },
           ),
         ),

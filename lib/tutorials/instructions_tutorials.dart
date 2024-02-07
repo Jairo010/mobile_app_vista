@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'tutorial_practice.dart';
+import '../main.dart';
 
 class InstructionTutorialsPage extends StatefulWidget {
   const InstructionTutorialsPage({super.key});
@@ -28,9 +29,26 @@ class InstructionTutorialsPageState extends State<InstructionTutorialsPage> {
   int currentInstructionIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    // ignore: deprecated_member_use
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.popUntil(context, ModalRoute.withName('/'));
+        return false;
+      },
+      child: Scaffold(
       appBar: AppBar(
         title: const Text("Instrucciones"),
+        leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MyApp(),
+                ),
+              );
+            },
+          ),
       ),
       body: Container(
         padding: const EdgeInsets.all(30),
@@ -96,6 +114,7 @@ class InstructionTutorialsPageState extends State<InstructionTutorialsPage> {
             ),
           ],
         ),
+      ),
       ),
     );
   }
