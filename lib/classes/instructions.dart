@@ -63,7 +63,7 @@ class InstructionsPageState extends State<InstructionsPage> {
             },
           ),
         ),
-        body: Container(
+        body: SingleChildScrollView(
           padding: const EdgeInsets.all(30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,6 +75,7 @@ class InstructionsPageState extends State<InstructionsPage> {
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
+              const SizedBox(height: 50),
               Text(
                 nameOfInstruction[currentInstructionIndex],
                 style: const TextStyle(
@@ -82,6 +83,7 @@ class InstructionsPageState extends State<InstructionsPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              const SizedBox(height: 80),
               Text(
                 instructions[currentInstructionIndex],
                 style: const TextStyle(
@@ -89,6 +91,7 @@ class InstructionsPageState extends State<InstructionsPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              const SizedBox(height: 100),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
