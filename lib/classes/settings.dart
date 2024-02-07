@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart';
-import '../main.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
