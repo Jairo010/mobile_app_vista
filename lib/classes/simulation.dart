@@ -15,6 +15,7 @@ class SimulationPage extends StatefulWidget {
 
 List<CameraDescription> cameras = [];
 String dropdownButtonText = 'Pizarra';
+Color titleColor = Colors.blueAccent;
 
 class SimulationPageState extends State<SimulationPage> {
   @override
@@ -196,7 +197,7 @@ class SimulationPageState extends State<SimulationPage> {
       if (pickedFile != null) {
         _image = FileImage(File(pickedFile.path));
       } else {
-        print('No image selected.');
+        //print('No image selected.');
       }
     });
   }
