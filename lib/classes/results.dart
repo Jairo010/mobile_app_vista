@@ -117,14 +117,9 @@ class ResultWidgetPageState extends State<ResultWidget> {
                 Padding(
                   padding: const EdgeInsets.only(right: 16.0),
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       SettingsPageState.muyStatic();
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MyApp(),
-                        ),
-                      );
+                      Navigator.popUntil(context, ModalRoute.withName('/'));
                     },
                     child: const Text("Hecho"),
                   ),

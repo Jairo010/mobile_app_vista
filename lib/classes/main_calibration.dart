@@ -115,13 +115,8 @@ class MainCalibrationPageState extends State<MainCalibrationPage> {
                               ),
                               if (isChecked)
                                 ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const MyApp(),
-                                      ),
-                                    );
+                                  onPressed: () async {
+                                    Navigator.popUntil(context, ModalRoute.withName('/'));
                                   },
                                   child: const Text('Confirmar'),
                                 ),

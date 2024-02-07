@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:ui';
-import 'package:mobile_app/classes/instructions.dart';
+import 'instructions.dart';
 import '../main.dart';
 
 class SimulationPage extends StatefulWidget {

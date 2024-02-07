@@ -95,13 +95,8 @@ class FinalTutorialsPageState extends State<FinalTutorialsPage> {
                               currentInstructionIndex++;
                             });
                           }
-                        : () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MyApp(),
-                              ),
-                            );
+                        : () async {
+                            Navigator.popUntil(context, ModalRoute.withName('/'));
                           },
                     child: Text(
                       currentInstructionIndex < instructions.length - 1

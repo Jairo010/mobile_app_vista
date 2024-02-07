@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/services.dart';
+import '../main.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -10,9 +12,21 @@ class SettingsPage extends StatefulWidget {
 class SettingsPageState extends State<SettingsPage> {
   @override
   void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     _loadCounter();
     _loadSettings();
     super.initState();
+  }
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
   }
 
   static void muyStatic() {
@@ -64,9 +78,21 @@ class SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    // ignore: deprecated_member_use
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.popUntil(context, ModalRoute.withName('/'));
+        return false;
+      },
+      child: Scaffold(
       appBar: AppBar(
         title: const Text('Ajustes'),
+        leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () async {
+              Navigator.popUntil(context, ModalRoute.withName('/'));
+            },
+          ),
       ),
       body: ListView(
         children: [
@@ -80,6 +106,7 @@ class SettingsPageState extends State<SettingsPage> {
           buildListTileWithButton('Enviar feedback anónimo', () {}),
           buildListTile('Versión', '3.7.0', () {}),
         ],
+      ),
       ),
     );
   }
